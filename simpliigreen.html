@@ -791,10 +791,11 @@ header:not(.scrolled).on-dark a:focus-visible,
     if(reduce){appear=0.9;scale=0.55;drift=0;}
     else{
       appear=smooth(p,0.30,0.48);                 // fade in as the pool freezes — then stays visible
-      const grow=smooth(p,0.30,0.56);             // emerge & grow to a modest hero size
-      const drop=smooth(p,0.56,1.00);             // then CONTINUOUSLY shrink + fall (no pause)
-      scale=0.42 + grow*0.33 - drop*0.55;         // .42 -> ~0.75 peak -> ~0.20 (matches the blender cube)
-      drift=lerp(6,-2,grow) + drop*drop*64;       // vh: settle up, then fall ALL the way down & off-screen into the blender
+      const grow  =smooth(p,0.30,0.56);           // emerge & grow to the hero peak (~0.75) at p=0.56
+      const shrink=smooth(p,0.56,0.80);           // shrink down to the blender-cube size (0.20) BEFORE it leaves
+      const fall  =smooth(p,0.60,1.00);           // then COMMIT to the fall — a small cube dropping into the jar
+      scale=0.42 + grow*0.33 - shrink*0.55;       // .42 -> ~0.75 peak -> locked at ~0.20 by p=0.80 (matches the blender cube)
+      drift=lerp(6,-2,grow) + Math.pow(fall,1.6)*70; // vh: settle up, then fall all the way off the bottom into the blender at the seam
     }
     cube.style.opacity=(appear*0.95).toFixed(3);  // never fades out — it falls away, doesn't vanish
     cube.style.transform=`translate(-50%, calc(-50% + ${drift.toFixed(2)}vh)) scale(${Math.max(scale,0.06).toFixed(3)})`;
