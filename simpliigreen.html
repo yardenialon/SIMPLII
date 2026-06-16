@@ -318,11 +318,13 @@ footer li a:hover{color:var(--yellow)}
   .nav-desktop{display:none}
   .burger{display:flex}
   header .cta.header-cta{display:none}
-  /* Blender on portrait: the video is landscape (4:3) with the jar centered, so width-fitting
-     makes it tiny at the bottom and leaves a big yellow gap. Instead size it by HEIGHT and let
-     the side-margins crop off — the jar gets big and rises up to meet the headline. */
-  .blend-jar-wrap{width:auto;height:92vh;bottom:0}   /* DIAL: ↑ height = bigger jar / smaller gap (try 86–104vh) */
-  .blend-headline{top:clamp(22px,9vh,84px)}          /* sit the headline a touch lower, closer to the jar */
+  /* Mobile blender: the clip is landscape with the jar in the lower-centre, so a width-fit jar
+     comes out tiny and stuck at the bottom. The wrap + its video child are both absolutely
+     positioned, so width:auto collapses — we must give an EXPLICIT width. Make the jar large and
+     let the stage crop the yellow side-margins, then drop the headline right above the jar so
+     there's no empty yellow between the title and the video. */
+  .blend-jar-wrap{height:78vh;width:calc(78vh * 1664 / 1248);bottom:0}  /* DIAL height: ↑ = bigger jar, rim higher */
+  .blend-headline{top:clamp(20px,18vh,170px)}                            /* headline sits just above the jar */
 }
 @media(max-width:560px){
   .facts{grid-template-columns:1fr 1fr}
