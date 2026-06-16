@@ -110,6 +110,20 @@ header:not(.scrolled).on-dark .nav a.link{color:rgba(255,255,255,.92)}
 .cta.rasp{background:var(--raspberry);color:#fff;border-color:var(--raspberry)}
 
 .nav-desktop{display:flex}
+/* ===== NAV DROPDOWN (For Business) ===== */
+.navdd{position:relative;display:flex;align-items:center}
+.navdd-btn{font-family:inherit;background:none;border:0;cursor:pointer;font-weight:600;font-size:15px;color:var(--green);padding:6px 2px;display:inline-flex;align-items:center;gap:5px}
+.navdd-btn .cv{font-size:10px;line-height:1;transition:transform .25s var(--ease)}
+header:not(.scrolled).on-dark .navdd-btn{color:rgba(255,255,255,.92)}
+.navdd.active .navdd-btn{color:var(--starburst)}
+header:not(.scrolled).on-dark .navdd.active .navdd-btn{color:var(--yellow)}
+.navdd::after{content:"";position:absolute;top:100%;left:0;right:0;height:14px}
+.navdd-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(6px);min-width:184px;background:#fff;border:1.5px solid rgba(21,64,72,.10);border-radius:14px;box-shadow:0 18px 44px rgba(21,64,72,.16);padding:8px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);z-index:70}
+.navdd:hover .navdd-menu,.navdd:focus-within .navdd-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.navdd:hover .navdd-btn .cv,.navdd:focus-within .navdd-btn .cv{transform:rotate(180deg)}
+.navdd-menu a{display:block;padding:10px 14px;border-radius:9px;font-weight:600;font-size:14.5px;color:var(--green);white-space:nowrap}
+.navdd-menu a:hover{background:var(--cream)}
+.navdd-menu a[aria-current="page"]{color:var(--starburst)}
 .burger{
   display:none;flex-direction:column;justify-content:center;gap:5px;
   width:46px;height:46px;border-radius:14px;border:2px solid var(--green);
@@ -390,7 +404,13 @@ header:not(.scrolled).on-dark a:focus-visible,
     <a class="link" href="#product">The Cube</a>
     <a class="link" href="#science">Why Frozen</a>
     <a class="link" href="#use">How to Use</a>
-    <a class="link" href="simpliitexture.html">For Business</a>
+    <div class="navdd">
+      <button type="button" class="navdd-btn" aria-haspopup="true">For Business <span class="cv">▾</span></button>
+      <div class="navdd-menu" role="menu">
+        <a href="simpliitexture.html" role="menuitem">For Industry</a>
+        <a href="food-service.html" role="menuitem">Food Service</a>
+      </div>
+    </div>
     <a class="link" href="store-locator.html">Find a store</a>
   </nav>
   <div class="nav">
@@ -407,6 +427,7 @@ header:not(.scrolled).on-dark a:focus-visible,
   <a href="#science" data-close>Why Frozen <span class="chev">→</span></a>
   <a href="#use" data-close>How to Use <span class="chev">→</span></a>
   <a href="simpliitexture.html" data-close>For Business <span class="chev">→</span></a>
+  <a href="food-service.html" data-close>Food Service <span class="chev">→</span></a>
   <a href="store-locator.html" data-close>Find a store <span class="chev">→</span></a>
   <a href="#shop" class="drawer-cta" data-close>Shop spirulina</a>
   <span class="drawer-foot">Real. Super. Food. — sunshine in a cube.</span>
@@ -628,7 +649,7 @@ header:not(.scrolled).on-dark a:focus-visible,
       <h5>Find us</h5>
       <ul>
         <li><a href="store-locator.html">Store locator</a></li>
-        <li><a href="#">Wholesale</a></li>
+        <li><a href="food-service.html">Food service</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Recipes</a></li>
       </ul>
