@@ -325,11 +325,17 @@ footer li a:hover{color:var(--yellow)}
      there's no empty yellow between the title and the video. */
   .blend-jar-wrap{height:78vh;width:calc(78vh * 1664 / 1248);bottom:0}  /* DIAL height: ↑ = bigger jar, rim higher */
   .blend-headline{top:clamp(20px,18vh,170px)}                            /* headline sits just above the jar */
+  .blend-sub{font-size:14.5px;margin-top:9px}                            /* .30em ≈ 10px on phones was too small to read */
 }
 @media(max-width:560px){
   .facts{grid-template-columns:1fr 1fr}
   .fgrid{grid-template-columns:1fr 1fr}
   .wrap{padding:clamp(54px,12vw,90px) 20px}
+  /* Phone heading scale — fluid & proportional (was pinned flat to the desktop floor below ~440px,
+     so a 360px and a 430px phone got the SAME size). Now tracks the viewport; continuous with the
+     desktop clamp at 560px. Brand palette + Libre Franklin unchanged — this is size/hierarchy only. */
+  .hero-line h1{font-size:clamp(38px,11.2vw,56px)}   /* scales ~40→54 across phones; longest line stays ~88% width */
+  .intro h2{font-size:clamp(26px,6.4vw,32px)}        /* long sentence-style head: smaller for cleaner wrapping */
 }
 @media(prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
