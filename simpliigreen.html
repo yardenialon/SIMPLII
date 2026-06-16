@@ -203,7 +203,7 @@ body.menu-open{overflow:hidden}
 /* ===================== BLENDER SEQUENCE ===================== */
 .blend{height:340vh;background:var(--yellow)}
 .blend-stage{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.blend-headline{position:absolute;top:clamp(36px,17vh,170px);left:0;right:0;height:0;text-align:center;z-index:5;pointer-events:none}
+.blend-headline{position:absolute;top:clamp(72px,10vh,120px);left:0;right:0;height:0;text-align:center;z-index:5;pointer-events:none}  /* DIAL top: ↓vh = higher (more top headroom, but closer to jar) */
 .blend-line{
   position:absolute;left:50%;top:0;transform:translateX(-50%);width:max-content;max-width:94vw;
   font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.92;
@@ -215,7 +215,7 @@ body.menu-open{overflow:hidden}
 .blend-sub{display:block;font-size:.30em;letter-spacing:.01em;font-weight:700;margin-top:.55em;text-transform:none;color:var(--ink)}
 .blend-jar-wrap{
   position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-  width:auto;height:86vh;aspect-ratio:1664/1248;z-index:1;   /* size by HEIGHT: jar fills & rim sits high (DIAL 78–92vh) */
+  width:auto;height:82vh;aspect-ratio:1664/1248;z-index:1;   /* size by HEIGHT: jar fills & rim sits high (DIAL 78–90vh; ↓ lowers rim, more room for text) */
   -webkit-mask-image:linear-gradient(to bottom,transparent,#000 9%),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
   -webkit-mask-composite:source-in;
   mask-image:linear-gradient(to bottom,transparent,#000 9%),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
