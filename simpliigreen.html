@@ -189,19 +189,19 @@ body.menu-open{overflow:hidden}
 /* ===================== BLENDER SEQUENCE ===================== */
 .blend{height:340vh;background:var(--yellow)}
 .blend-stage{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.blend-headline{position:absolute;top:clamp(34px,7vh,96px);left:0;right:0;height:0;text-align:center;z-index:5;pointer-events:none}
+.blend-headline{position:absolute;top:clamp(36px,17vh,170px);left:0;right:0;height:0;text-align:center;z-index:5;pointer-events:none}
 .blend-line{
   position:absolute;left:50%;top:0;transform:translateX(-50%);width:max-content;max-width:94vw;
   font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.92;
   font-size:clamp(34px,7vw,82px);color:var(--green);opacity:0;transition:opacity .35s var(--ease);
-  text-shadow:0 2px 26px rgba(255,252,239,.6),0 1px 3px rgba(255,252,239,.7);
+  text-shadow:none;
 }
 .blend-line.show{opacity:1}
 .blend-line .y{background:var(--green);color:var(--yellow);padding:0 .12em;border-radius:10px}
 .blend-sub{display:block;font-size:.30em;letter-spacing:.01em;font-weight:700;margin-top:.55em;text-transform:none;color:var(--ink)}
 .blend-jar-wrap{
   position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-  width:min(94vw,760px,90vh);aspect-ratio:1664/1248;z-index:1;
+  width:auto;height:86vh;aspect-ratio:1664/1248;z-index:1;   /* size by HEIGHT: jar fills & rim sits high (DIAL 78–92vh) */
   -webkit-mask-image:linear-gradient(to bottom,transparent,#000 9%),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
   -webkit-mask-composite:source-in;
   mask-image:linear-gradient(to bottom,transparent,#000 9%),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
