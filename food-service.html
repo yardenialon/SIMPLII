@@ -59,6 +59,20 @@ header:not(.scrolled).on-dark .nav a.link{color:rgba(255,255,255,.92)}
 .cta.solid{background:var(--green);color:#fff;border-color:var(--green)}
 .cta.ghost-dark{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
 .nav-desktop{display:flex}
+/* ===== NAV DROPDOWN (For Business) ===== */
+.navdd{position:relative;display:flex;align-items:center}
+.navdd-btn{font-family:inherit;background:none;border:0;cursor:pointer;font-weight:600;font-size:15px;color:var(--green);padding:6px 2px;display:inline-flex;align-items:center;gap:5px}
+.navdd-btn .cv{font-size:10px;line-height:1;transition:transform .25s var(--ease)}
+header:not(.scrolled).on-dark .navdd-btn{color:rgba(255,255,255,.92)}
+.navdd.active .navdd-btn{color:var(--starburst)}
+header:not(.scrolled).on-dark .navdd.active .navdd-btn{color:var(--yellow)}
+.navdd::after{content:"";position:absolute;top:100%;left:0;right:0;height:14px}
+.navdd-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(6px);min-width:184px;background:#fff;border:1.5px solid rgba(21,64,72,.10);border-radius:14px;box-shadow:0 18px 44px rgba(21,64,72,.16);padding:8px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);z-index:70}
+.navdd:hover .navdd-menu,.navdd:focus-within .navdd-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.navdd:hover .navdd-btn .cv,.navdd:focus-within .navdd-btn .cv{transform:rotate(180deg)}
+.navdd-menu a{display:block;padding:10px 14px;border-radius:9px;font-weight:600;font-size:14.5px;color:var(--green);white-space:nowrap}
+.navdd-menu a:hover{background:var(--cream)}
+.navdd-menu a[aria-current="page"]{color:var(--starburst)}
 .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:46px;height:46px;border-radius:14px;border:2px solid var(--green);background:rgba(255,255,255,.5);cursor:pointer;padding:0 11px;z-index:80}
 .burger span{height:2.6px;width:100%;background:var(--green);border-radius:3px;transition:transform .3s var(--ease),opacity .25s}
 header:not(.scrolled).on-dark .burger{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.12)}
@@ -295,8 +309,13 @@ header.on-dark:not(.scrolled) .nav a.link[aria-current="page"]{color:var(--yello
   </a>
   <nav class="nav nav-desktop" aria-label="Primary">
     <a class="link" href="simpliigreen.html">For Consumers</a>
-    <a class="link" href="food-service.html" aria-current="page">Food Service</a>
-    <a class="link" href="simpliitexture.html">For Industry</a>
+    <div class="navdd active">
+      <button type="button" class="navdd-btn" aria-haspopup="true">For Business <span class="cv">▾</span></button>
+      <div class="navdd-menu" role="menu">
+        <a href="simpliitexture.html" role="menuitem">For Industry</a>
+        <a href="food-service.html" role="menuitem" aria-current="page">Food Service</a>
+      </div>
+    </div>
     <a class="link" href="store-locator.html">Find a store</a>
   </nav>
   <div class="nav">
