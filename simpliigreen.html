@@ -820,14 +820,24 @@ header:not(.scrolled).on-dark a:focus-visible,
 (function(){
   const cv=document.getElementById('snow');if(!cv)return;
   const ctx=cv.getContext('2d');let W,H,flakes;
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const coarse=matchMedia('(pointer:coarse)').matches || innerWidth<=760;
   function size(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;
-    flakes=[...Array(60)].map(()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.4+0.6,s:Math.random()*0.6+0.2,d:Math.random()*6}));}
+    const N=coarse?28:60;                                  /* fewer flakes on phones */
+    flakes=[...Array(N)].map(()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.4+0.6,s:Math.random()*0.6+0.2,d:Math.random()*6}));}
+  let running=false,rafId=0;
   function loop(){ctx.clearRect(0,0,W,H);ctx.fillStyle='rgba(255,255,255,0.55)';
     flakes.forEach(f=>{f.y+=f.s;f.x+=Math.sin((f.y+f.d)/40)*0.4;if(f.y>H){f.y=-4;f.x=Math.random()*W;}
       ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,7);ctx.fill();});
-    requestAnimationFrame(loop);}
-  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  size();window.addEventListener('resize',size);if(!reduce)loop();
+    if(running)rafId=requestAnimationFrame(loop);}
+  function start(){if(running||reduce)return;running=true;rafId=requestAnimationFrame(loop);}
+  function stop(){running=false;if(rafId)cancelAnimationFrame(rafId);}
+  size();window.addEventListener('resize',size);
+  /* Only animate while the frozen section is on screen — not a perpetual main-thread loop. */
+  if(reduce){}
+  else if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>{es[0].isIntersecting?start():stop();},{rootMargin:'100px 0px'}).observe(cv);
+  }else{start();}
 })();
 
 /* ===== BLENDER VIDEO (scroll-scrubbed) ===== */
@@ -844,6 +854,12 @@ header:not(.scrolled).on-dark a:focus-visible,
   let cur=0,primed=false;
   const metaReady=()=>vid.readyState>=1 && isFinite(vid.duration) && vid.duration>0;
   try{vid.pause();}catch(e){}
+  /* Mobile decoders can't seek a video 60x/sec — flooding currentTime backs up the decode queue
+     and makes scrolling feel laggy/unresponsive. On touch devices: snap harder (fewer trailing
+     seeks), cap seeks to ~25fps, and use a bigger dead-zone. Desktop stays fully unthrottled. */
+  const coarse=matchMedia('(pointer:coarse)').matches || innerWidth<=760;
+  const EASE=coarse?0.5:0.35, SEEK_GAP=coarse?40:0, SEEK_EPS=coarse?0.025:0.01;
+  let lastSeek=0, running=false, rafId=0;
   function prog(){
     const r=sec.getBoundingClientRect();
     const total=sec.offsetHeight-window.innerHeight;
@@ -854,24 +870,29 @@ header:not(.scrolled).on-dark a:focus-visible,
     lines.forEach((l,i)=>l.classList.toggle('show',i===a));
   }
   function loop(){
-    const r=sec.getBoundingClientRect();
-    const visible=r.top<window.innerHeight && r.bottom>0;
-    if(visible){
-      const q=reduce?0:prog();
-      phase(q);
-      if(metaReady()){
-        if(!primed){try{vid.pause();}catch(e){}primed=true;}
-        const dur=vid.duration;
-        const target=q*Math.max(dur-0.05,0.05);
-        cur+=(target-cur)*0.35;                 /* smooth the scrub */
-        if(Math.abs(target-cur)<0.004)cur=target;
-        if(Math.abs(vid.currentTime-cur)>0.01){try{vid.currentTime=cur;}catch(e){}}
+    const q=reduce?0:prog();
+    phase(q);
+    if(metaReady()){
+      if(!primed){try{vid.pause();}catch(e){}primed=true;}
+      const dur=vid.duration;
+      const target=q*Math.max(dur-0.05,0.05);
+      cur+=(target-cur)*EASE;                 /* ease toward the scroll position */
+      if(Math.abs(target-cur)<0.004)cur=target;
+      const now=performance.now();
+      if(now-lastSeek>=SEEK_GAP && Math.abs(vid.currentTime-cur)>SEEK_EPS){
+        try{vid.currentTime=cur;}catch(e){} lastSeek=now;   /* throttled seek */
       }
     }
-    requestAnimationFrame(loop);
+    if(running)rafId=requestAnimationFrame(loop);
   }
-  if(reduce)phase(0);
-  requestAnimationFrame(loop);
+  function start(){if(running)return;running=true;rafId=requestAnimationFrame(loop);}
+  function stop(){running=false;if(rafId)cancelAnimationFrame(rafId);}
+  if(reduce){phase(0);}
+  /* Run the scrub loop (with its layout reads + seeks) only while the blender is on/near screen,
+     so there's no perpetual rAF stealing the main thread up in the hero or down in the footer. */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>{es[0].isIntersecting?start():stop();},{rootMargin:'250px 0px'}).observe(sec);
+  }else{start();}
 })();
 </script>
 </body>
