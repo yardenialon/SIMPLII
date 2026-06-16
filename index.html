@@ -106,23 +106,28 @@ h2.big{font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-heigh
 .hub-top h1{font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.96;font-size:clamp(33px,5.6vw,72px)}
 .hub-top h1 .y{color:var(--yellow)}
 .hub-top p{max-width:660px;margin:20px auto 0;font-weight:500;font-size:clamp(16px,2vw,21px);color:rgba(255,255,255,.82)}
-.split{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(440px,62vh,760px)}
-.door{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(38px,5vw,76px) clamp(26px,5vw,64px);isolation:isolate;transition:flex .4s var(--ease)}
-.door.green{background:var(--green);color:#fff}
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(470px,64vh,780px)}
+.door{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(38px,5vw,76px) clamp(26px,5vw,64px);isolation:isolate}
+.door.green{background:var(--green-deep);color:#fff}
 .door.texture{background:var(--starburst);color:#06302a}
+.door-bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:right center;transform:scale(1.01);transition:transform .7s var(--ease)}
+.door:hover .door-bg{transform:scale(1.07)}
+.door.texture .door-bg{background-position:center}
+.door::before{content:"";position:absolute;inset:0;z-index:-1;transition:opacity .4s var(--ease)}
+.door.green::before{background:linear-gradient(100deg,var(--green-deep) 0%,var(--green-deep) 36%,rgba(14,46,52,.72) 60%,rgba(14,46,52,.20) 100%)}
+.door.texture::before{background:linear-gradient(100deg,var(--starburst) 0%,var(--starburst) 36%,rgba(49,178,120,.72) 60%,rgba(49,178,120,.16) 100%)}
+.door:hover::before{opacity:.9}
+.door .tagk{position:absolute;top:clamp(26px,4vw,40px);left:clamp(26px,5vw,64px);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:12px;opacity:.8}
 .door .kicker{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:13px;opacity:.85;margin-bottom:16px}
 .door h2{font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.9;font-size:clamp(38px,5.2vw,72px)}
-.door h2 small{display:block;font-size:.34em;letter-spacing:.04em;opacity:.7;margin-top:.4em;font-weight:800}
-.door p{font-weight:500;max-width:430px;margin:16px 0 26px;font-size:clamp(15px,1.55vw,18px);opacity:.95}
-.door .go{display:inline-flex;align-items:center;gap:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:15px;padding:13px 24px;border-radius:999px}
+.door h2 small{display:block;font-size:.34em;letter-spacing:.04em;opacity:.72;margin-top:.4em;font-weight:800}
+.door p{font-weight:500;max-width:380px;margin:16px 0 26px;font-size:clamp(15px,1.55vw,18px);opacity:.95}
+.door .go{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:14.5px;padding:13px 26px;border-radius:999px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
 .door.green .go{background:var(--yellow);color:var(--green)}
 .door.texture .go{background:#06302a;color:#fff}
+.door:hover .go{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.22)}
 .door .go .arr{transition:transform .3s var(--ease)}
-.door:hover .go .arr{transform:translateX(6px)}
-.door .ghost{position:absolute;z-index:-1;font-weight:900;text-transform:uppercase;font-size:clamp(120px,20vw,290px);line-height:.7;right:-.08em;bottom:-.2em;opacity:.08;pointer-events:none;letter-spacing:-.04em}
-.door::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(0,0,0,0);transition:background .4s var(--ease)}
-.door:hover::before{background:rgba(0,0,0,.06)}
-.door .tagk{position:absolute;top:clamp(26px,4vw,40px);left:clamp(26px,5vw,64px);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:12px;opacity:.7}
+.door:hover .go .arr{transform:translateX(5px)}
 
 /* ===== TECHNOLOGY ===== */
 .tech{background:var(--cream)}
@@ -170,7 +175,10 @@ footer li a:hover{color:var(--yellow)}
   .burger{display:flex}
   header .cta.header-cta{display:none}
   .split{grid-template-columns:1fr}
-  .door{min-height:60vh}
+  .door{min-height:62vh}
+  .door-bg{background-position:center top}
+  .door.green::before{background:linear-gradient(to top,var(--green-deep) 0%,var(--green-deep) 30%,rgba(14,46,52,.55) 62%,rgba(14,46,52,.16) 100%)}
+  .door.texture::before{background:linear-gradient(to top,var(--starburst) 0%,var(--starburst) 30%,rgba(49,178,120,.55) 62%,rgba(49,178,120,.14) 100%)}
 }
 @media(max-width:560px){
   .fgrid{grid-template-columns:1fr 1fr}
@@ -234,20 +242,20 @@ footer li a:hover{color:var(--yellow)}
   </div>
   <div class="split">
     <a class="door green" href="simpliigreen.html" aria-label="SimpliiGreen — for your kitchen">
+      <div class="door-bg" style="background-image:url(div-green.jpg)"></div>
       <span class="tagk">Consumer</span>
       <span class="kicker">SimpliiGood · for your kitchen</span>
       <h2>Simplii<br>Green<small>Frozen spirulina cubes</small></h2>
       <p>Fresh-frozen spirulina cubes for everyday wellness. Flavor-free — drop one in, blend, done.</p>
-      <span class="go">Shop &amp; explore <span class="arr">→</span></span>
-      <span class="ghost">GREEN</span>
+      <span class="go">Shop now <span class="arr">→</span></span>
     </a>
     <a class="door texture" href="simpliitexture.html" aria-label="SimpliiTexture — for the food industry and partners">
+      <div class="door-bg" style="background-image:url(div-texture.jpg)"></div>
       <span class="tagk">B2B · Investors</span>
       <span class="kicker">SimpliiGood · for industry &amp; partners</span>
       <h2>Simplii<br>Texture<small>Food-tech ingredients</small></h2>
       <p>Spirulina solutions for manufacturers — clean natural color, complete protein and texture, built for scale.</p>
-      <span class="go">Industry solutions <span class="arr">→</span></span>
-      <span class="ghost">B2B</span>
+      <span class="go">Explore <span class="arr">→</span></span>
     </a>
   </div>
 </section>
