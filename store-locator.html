@@ -182,6 +182,9 @@ stockist-store-locator{display:block;min-height:580px}
 .loc-note{text-align:center;margin-top:26px;color:var(--ink);font-weight:500;font-size:15.5px}
 .loc-note a{color:var(--green);font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .loc-note a:hover{color:var(--starburst)}
+.nav a.link[aria-current="page"]{color:var(--starburst)}
+header.on-dark:not(.scrolled) .nav a.link[aria-current="page"]{color:var(--yellow)}
+.drawer a[aria-current="page"]{color:var(--yellow)}
 @media(max-width:560px){
   .loc-title{font-size:clamp(34px,9vw,56px)}
   .loc-embed{min-height:560px;padding:10px}
@@ -203,6 +206,7 @@ stockist-store-locator{display:block;min-height:580px}
     <a class="link" href="simpliitexture.html">For Industry</a>
     <a class="link" href="/#technology">Technology</a>
     <a class="link" href="/#investors">Investors</a>
+    <a class="link" href="store-locator.html" aria-current="page">Find a store</a>
   </nav>
   <div class="nav">
     <a class="cta header-cta" href="/#contact">Contact</a>
@@ -218,6 +222,7 @@ stockist-store-locator{display:block;min-height:580px}
   <a href="simpliitexture.html" data-close>For Industry <span class="chev">→</span></a>
   <a href="/#technology" data-close>Technology <span class="chev">→</span></a>
   <a href="/#investors" data-close>Investors <span class="chev">→</span></a>
+  <a href="store-locator.html" data-close aria-current="page">Find a store <span class="chev">→</span></a>
   <a href="/#contact" class="drawer-cta" data-close>Contact us</a>
   <span class="drawer-foot">Real. Super. Food. — from your kitchen to the food industry.</span>
 </aside>
@@ -277,6 +282,7 @@ stockist-store-locator{display:block;min-height:580px}
         <li><a href="/#investors">Investors</a></li>
         <li><a href="simpliitexture.html">Partnerships</a></li>
         <li><a href="/#contact">Contact</a></li>
+        <li><a href="store-locator.html">Find a store</a></li>
         <li><a href="#">Press</a></li>
       </ul>
     </div>
