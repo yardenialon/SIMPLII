@@ -27,6 +27,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Libre Franklin = open-source stand-in for the brand font Franklin Gothic URW -->
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+<!-- Store locator map (Mapbox GL + SimpliiGood locator) -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.css" rel="stylesheet">
+<link href="stores.css" rel="stylesheet">
 <style>
 :root{
   /* ---- Exact SimpliiGood brand palette ---- */
@@ -612,6 +615,24 @@ header:not(.scrolled).on-dark a:focus-visible,
   </div>
 </section>
 
+<!-- ===== STORES / MAP ===== -->
+<section class="sg-section" id="stores">
+  <div class="sg-inner">
+    <span class="sg-eyebrow reveal">Where to buy</span>
+    <h2 class="sg-title reveal d1">Find us near you</h2>
+    <p class="sg-lead reveal d2">Fresh-frozen spirulina cubes &mdash; stocked at shops and partners near you. Search by city, shop or address.</p>
+    <div class="sg-locator reveal d2">
+      <div class="sg-panel">
+        <div class="sg-search">
+          <input id="sg-search" type="search" placeholder="Search by city, shop or address" aria-label="Search stores by city, shop or address" autocomplete="off" />
+        </div>
+        <ul id="sg-list" class="sg-list" aria-label="Store list"></ul>
+      </div>
+      <div id="sg-map" class="sg-map" role="application" aria-label="Map of SimpliiGood stockists"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer id="find">
   <div class="fgrid">
@@ -913,6 +934,12 @@ header:not(.scrolled).on-dark a:focus-visible,
     new IntersectionObserver(es=>{es[0].isIntersecting?start():stop();},{rootMargin:'250px 0px'}).observe(sec);
   }else{start();}
 })();
+</script>
+<!-- Store locator: Mapbox GL + SimpliiGood locator -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.js"></script>
+<script src="stores.js"></script>
+<script>
+  SimpliiStoreLocator.init({ container: 'sg-map', list: 'sg-list', search: 'sg-search' });
 </script>
 </body>
 </html>
