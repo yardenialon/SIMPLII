@@ -18,9 +18,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
-<!-- Store locator map (Mapbox GL + SimpliiGood locator) -->
-<link href="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.css" rel="stylesheet">
-<link href="stores.css" rel="stylesheet">
 <style>
 
 :root{
@@ -265,15 +262,12 @@ header.on-dark:not(.scrolled) .nav a.link[aria-current="page"]{color:var(--yello
 <section class="locator" id="locator">
   <div class="loc-wrap">
     <div class="loc-embed">
-      <div class="sg-locator">
-        <div class="sg-panel">
-          <div class="sg-search">
-            <input id="sg-search" type="search" placeholder="Search by city, shop or address" aria-label="Search stores by city, shop or address" autocomplete="off" />
-          </div>
-          <ul id="sg-list" class="sg-list" aria-label="Store list"></ul>
-        </div>
-        <div id="sg-map" class="sg-map" role="application" aria-label="Map of SimpliiGood stockists"></div>
-      </div>
+      <!-- Start Stockist.co widget -->
+      <stockist-store-locator data-stockist-widget-tag="u24423">
+        Loading store locator from <a href="https://stockist.co">Stockist store locator</a>&hellip;
+      </stockist-store-locator>
+      <script async src="https://stockist.co/embed/v1/widget.min.js"></script>
+      <!-- End Stockist.co widget -->
     </div>
     <p class="loc-note">Can&rsquo;t find a stockist near you yet? <a href="/#contact">Get in touch</a> &mdash; we&rsquo;re expanding fast.</p>
   </div>
@@ -353,12 +347,6 @@ header.on-dark:not(.scrolled) .nav a.link[aria-current="page"]{color:var(--yello
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
-</script>
-<!-- Store locator: Mapbox GL + SimpliiGood locator -->
-<script src="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.js"></script>
-<script src="stores.js"></script>
-<script>
-  SimpliiStoreLocator.init({ container: 'sg-map', list: 'sg-list', search: 'sg-search' });
 </script>
 </body>
 </html>
