@@ -15,7 +15,7 @@
    ========================================================================== */
 
 /* 1) ---- Mapbox public token -------------------------------------------- */
-const SIMPLII_MAPBOX_TOKEN = 'PASTE_YOUR_MAPBOX_PUBLIC_TOKEN_HERE';
+const SIMPLII_MAPBOX_TOKEN = 'pk.eyJ1IjoiYWxvbnlhIiwiYSI6ImNtcDFvNnJrMDA1aDIycHIxNXlkcDlwNHYifQ.ZtByN_PWknNPBzGryBwQ7Q';
 
 /* 2) ---- Store list (REPLACE THESE SAMPLES WITH REAL STORES) ------------- */
 /*    name    : shop/partner name
