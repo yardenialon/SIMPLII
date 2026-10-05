@@ -18,6 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.css" rel="stylesheet">
+<link href="stores.css" rel="stylesheet">
 <style>
 
 :root{
@@ -192,7 +194,6 @@ footer li a:hover{color:var(--yellow)}
 .locator{background:var(--cream)}
 .loc-wrap{max-width:var(--maxw);margin:0 auto;padding:clamp(36px,6vw,72px) clamp(16px,4vw,40px) clamp(64px,9vw,120px)}
 .loc-embed{background:#fff;border:2px solid rgba(21,64,72,.10);border-radius:var(--r);padding:clamp(12px,2vw,22px);box-shadow:0 24px 60px rgba(21,64,72,.10);min-height:620px}
-stockist-store-locator{display:block;min-height:580px}
 .loc-note{text-align:center;margin-top:26px;color:var(--ink);font-weight:500;font-size:15.5px}
 .loc-note a{color:var(--green);font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .loc-note a:hover{color:var(--starburst)}
@@ -262,12 +263,14 @@ header.on-dark:not(.scrolled) .nav a.link[aria-current="page"]{color:var(--yello
 <section class="locator" id="locator">
   <div class="loc-wrap">
     <div class="loc-embed">
-      <!-- Start Stockist.co widget -->
-      <stockist-store-locator data-stockist-widget-tag="u24423">
-        Loading store locator from <a href="https://stockist.co">Stockist store locator</a>&hellip;
-      </stockist-store-locator>
-      <script async src="https://stockist.co/embed/v1/widget.min.js"></script>
-      <!-- End Stockist.co widget -->
+      <div class="sg-locator">
+        <div id="sg-map" class="sg-map" role="application" aria-label="Map of SimpliiGood stockists"></div>
+        <div class="sg-panel">
+          <input id="sg-search" class="sg-search" type="search" placeholder="Search by city, store or ZIP code" aria-label="Search stores" autocomplete="off" />
+          <p id="sg-count" class="sg-count" aria-live="polite"></p>
+          <ul id="sg-list" class="sg-list"></ul>
+        </div>
+      </div>
     </div>
     <p class="loc-note">Can&rsquo;t find a stockist near you yet? <a href="/#contact">Get in touch</a> &mdash; we&rsquo;re expanding fast.</p>
   </div>
@@ -348,5 +351,7 @@ header.on-dark:not(.scrolled) .nav a.link[aria-current="page"]{color:var(--yello
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 </script>
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.js"></script>
+<script src="stores.js"></script>
 </body>
 </html>

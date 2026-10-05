@@ -1,0 +1,194 @@
+/* =============================================================================
+   SimpliiGood store locator — layout & styling (Mapbox GL)
+   ========================================================================== */
+
+.sg-locator {
+  display: grid;
+  grid-template-columns: 1.25fr 0.9fr;
+  gap: 18px;
+  min-height: 600px;
+}
+@media (max-width: 880px) {
+  .sg-locator { grid-template-columns: 1fr; }
+}
+
+/* ---- Map ---------------------------------------------------------------- */
+.sg-map {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #eef1f0;
+}
+@media (max-width: 880px) {
+  .sg-map { height: 420px; }
+}
+
+.sg-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--starburst, #31B278);
+  border: 2.5px solid #fff;
+  box-shadow: 0 2px 6px rgba(21, 64, 72, 0.35);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.sg-marker:hover { transform: scale(1.25); }
+
+.sg-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+  color: var(--ink, #143A40);
+  font-weight: 600;
+}
+
+/* ---- Right panel: search + list ---------------------------------------- */
+.sg-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.sg-search {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid rgba(21, 64, 72, 0.14);
+  border-radius: 999px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink, #143A40);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.sg-search::placeholder { color: rgba(20, 58, 64, 0.5); }
+.sg-search:focus {
+  border-color: var(--starburst, #31B278);
+  box-shadow: 0 0 0 4px rgba(49, 178, 120, 0.15);
+}
+
+.sg-count {
+  margin: 12px 2px 8px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(20, 58, 64, 0.6);
+}
+
+.sg-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  max-height: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+}
+@media (max-width: 880px) {
+  .sg-list { max-height: 360px; }
+}
+
+.sg-item {
+  background: #fff;
+  border: 1.5px solid rgba(21, 64, 72, 0.10);
+  border-radius: 14px;
+  padding: 14px 16px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
+}
+.sg-item:hover {
+  border-color: rgba(49, 178, 120, 0.5);
+  box-shadow: 0 10px 24px rgba(21, 64, 72, 0.08);
+}
+
+.sg-item-main {
+  cursor: pointer;
+  display: block;
+  outline: none;
+}
+.sg-item-main:focus-visible {
+  border-radius: 8px;
+  box-shadow: 0 0 0 3px rgba(49, 178, 120, 0.4);
+}
+
+.sg-item-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 15.5px;
+  color: var(--green, #154048);
+  line-height: 1.25;
+}
+.sg-item-dist {
+  flex: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--starburst, #31B278);
+  white-space: nowrap;
+}
+.sg-item-addr {
+  display: block;
+  margin-top: 4px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: rgba(20, 58, 64, 0.72);
+  line-height: 1.4;
+}
+.sg-item-dir {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--starburst, #31B278);
+  text-decoration: none;
+}
+.sg-item-dir:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.sg-empty {
+  padding: 18px 6px;
+  color: rgba(20, 58, 64, 0.6);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ---- Popups ------------------------------------------------------------- */
+.sg-pop { padding: 2px 4px; }
+.sg-pop-name {
+  display: block;
+  font-weight: 800;
+  font-size: 14.5px;
+  color: var(--green, #154048);
+  margin-bottom: 3px;
+}
+.sg-pop-addr {
+  display: block;
+  font-size: 13px;
+  color: rgba(20, 58, 64, 0.75);
+  margin-bottom: 6px;
+}
+.sg-pop-link {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--starburst, #31B278);
+  text-decoration: none;
+}
+.sg-pop-link:hover { text-decoration: underline; }
+.mapboxgl-popup-content {
+  border-radius: 12px !important;
+  padding: 12px 14px !important;
+  box-shadow: 0 12px 30px rgba(21, 64, 72, 0.18) !important;
+}
